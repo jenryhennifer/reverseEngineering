@@ -34,7 +34,7 @@ db.sequelize.sync().then(function() {
 
 ## Middleware: isAuthenticated
 
-This file applies the middleware for restricing routs a useris not allowed to visit if not logged in. Which means if the username and password are not found insisde the database, then the user cannot observe the '/members' URL. 
+This file applies the middleware for restricing routs a user is not allowed to visit if not logged in. Which means if the username and password are not found insisde the database, then the user cannot observe the '/members' URL. 
 
 ## convig.json
 
@@ -52,15 +52,30 @@ API routes navigates the api urls within the app. It uses app.post and app.get t
 
 ## html-routes
 
-html-routes is where the app will send information to the HTML pages. From the root (/), if the user already has an account ti will automatically redirect them to their members page upon login. This will also occur from the /login url. 
-
+html-routes is where the app will send information to the HTML pages. From the root (/), if the user already has an account ti will automatically redirect them to their members page upon login; This will also occur from the /login url. When the app is accessing /members url it authenticates if the user is authorized to see the page (i.e. logged in)
 
 # Models
+
+## index.js
+
+The index file inside of models requires an install of file server(fs), path, and sequelize. This verifies which database you want to use. 
+
+The fs is used to read the directory and filter it based on files that do the file does not contain the basename, are not hidden files (containing a . at the beginning of the filename), and ensure they are a JavaScript file. Once they are filtered, each file will imported to sequelize db by joining the directory name with the file name. model.name is then created as a key inside of the object db and assigned to the name 'model'. The code below allows the app to load all files that are inside the db object so the creator does not need to keep calling every file located in the models folder.
+
+```
+Object.keys(db).forEach(function(modelName) {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+```
+
+## 
 
 # Resources:
 
 * https://www.passportjs.org
 * https://expressjs.com/
-
+* https://sequelize.org/
 
 # Author

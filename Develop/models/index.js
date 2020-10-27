@@ -14,12 +14,16 @@ var config    = require(__dirname + '/../config/config.json')[env];
 //creating an object
 var db        = {};
 
+//varifies which database configuration you want to use
 if (config.use_env_variable) {
+  //checks the database adn uses the default configuration for your DB
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
+  //creates its own default configuration for the database in case something changes
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+//file server
 fs
   .readdirSync(__dirname)
   .filter(function(file) {
@@ -31,6 +35,8 @@ fs
     db[model.name] = model;
   });
 
+//allows for all files inside models to be called without needing to require thems separately
+//files are inside db
 Object.keys(db).forEach(function(modelName) {
   if (db[modelName].associate) {
     db[modelName].associate(db);
