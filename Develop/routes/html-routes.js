@@ -11,6 +11,7 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
+    //joins the directory name to the papth leading to signup.html
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
 

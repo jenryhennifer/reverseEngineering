@@ -1,5 +1,7 @@
 # reverseEngineering
 
+![sample](sample.png)
+
 ## Installation
 
 ``` 
@@ -46,19 +48,19 @@ This file requires [passport.js](https://www.passportjs.org) (used for authentic
 
 ## api-routes
 
-API routes navigates the api urls within the app. It uses app.post and app.get to either create or read information. When directed to the /api/login url the user's information is checked against the existing database to ensure they are a current user. The passport authenticate function
+API routes navigates the api urls within the app. It uses app.post and app.get to either create or read information. When directed to the /api/login url the user's information is checked against the existing database to ensure they are a current user. The [passport authenticate](http://www.passportjs.org/docs/authenticate/) function ensures information is correct or will return a 401 unauthorized status to the user. When directed to the /api/signup url, it will refer to the models folder to create the user information. It takes in email and password as objects and redirect the information to the /api/login url. _(See section_ models _for error handling and information processing)_ When the user is inside the /members url they will be given an option to 'logout' which will return them to the root (/). The app uses /api/user_data to access if the user is already logged in.  
 
 ## html-routes
 
+html-routes is where the app will send information to the HTML pages. From the root (/), if the user already has an account ti will automatically redirect them to their members page upon login. This will also occur from the /login url. 
+
+
+# Models
 
 # Resources:
 
 * https://www.passportjs.org
+* https://expressjs.com/
 
 
-passportJS
-
-    https://www.npmjs.com/package/passport
-
-    LOCALSTRATEGY
-    The local authentication strategy authenticates users using a username and password. The strategy requires a verify callback, which accepts these credentials and calls done providing a user.
+# Author
