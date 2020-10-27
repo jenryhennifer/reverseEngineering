@@ -1,5 +1,6 @@
 // Requiring necessary npm packages
 var express = require("express");
+
 var session = require("express-session");
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
@@ -10,12 +11,23 @@ var db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication
 var app = express();
+
+//middleware that parses the ql library
 app.use(express.urlencoded({ extended: true }));
+
+//middleware that parses incoming requests with JSON
 app.use(express.json());
+
+//middleware that serves static assets files
 app.use(express.static("public"));
+
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+
+//initializes passport
 app.use(passport.initialize());
+
+//applies persistent login sessions
 app.use(passport.session());
 
 // Requiring our routes
