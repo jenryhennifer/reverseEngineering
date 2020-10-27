@@ -8,7 +8,9 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      //prevents doubling emails inside the db
       unique: true,
+      //validator to allow that the information placed is proper formatting for an email
       validate: {
         isEmail: true
       }

@@ -70,12 +70,31 @@ Object.keys(db).forEach(function(modelName) {
 });
 ```
 
-## 
+## user.js
+
+Bcryptjs installation is required inside this file. The user model is crated with sequelize. This sets the parameters for the database. The datatype for both the email and password is a STRING and cannot be null. The email has to be unique and is also validated that it is an email through a prewritten method with sequelize. 
+
+```
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+```
+The password validator creates a custom method for the User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database. The hashed password is made using bcryptjs. The password will be hashed before teh User is created.
+
 
 # Resources:
 
 * https://www.passportjs.org
 * https://expressjs.com/
 * https://sequelize.org/
+* https://www.npmjs.com/package/bcryptjs
 
 # Author
