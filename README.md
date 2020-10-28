@@ -2,6 +2,10 @@
 
 ![sample](sample.png)
 
+# Purpose
+
+The purpose of this page is to practice a login screen an analize what the code is doing and practice pseudocoding!
+
 ## Installation
 
 ``` 
