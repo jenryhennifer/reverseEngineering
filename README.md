@@ -35,6 +35,14 @@ db.sequelize.sync().then(function() {
 ## Middleware: isAuthenticated
 
 This file applies the middleware for restricing routs a user is not allowed to visit if not logged in. Which means if the username and password are not found insisde the database, then the user cannot observe the '/members' URL. 
+```
+module.exports = function(req, res, next) {
+  if (req.user) {
+    return next();
+  }
+  return res.redirect("/");
+};
+```
 
 ## convig.json
 
@@ -89,6 +97,25 @@ Bcryptjs installation is required inside this file. The user model is crated wit
 ```
 The password validator creates a custom method for the User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database. The hashed password is made using bcryptjs. The password will be hashed before teh User is created.
 
+# Public
+
+** All of the HTML files use Bootstrap for styling. **
+
+## js login.js / login.html
+
+This form uses JQuery to target classes inside the html. The html imports the javascript inside a script tag:
+```
+  <script type="text/javascript" src="js/login.js"></script>
+```
+When submit is clicked, it accesses the user input data to post the data. The function 'loginUser' takes in two paramaters when posting information to the /api/login/ url. The post applies an email and password to the DB. It will then load the /members url. 
+
+## js members.js / members.html
+
+This document will take in user login information and add the user email to the html page using a get request.
+
+## js signup.js / signup.html
+
+Similar to the login.js, this form uses JQuery to target classes inside the html. When the submit is clicked, it acceses the user input data to post the data. When there is data for username and password, it will run the signUpUser function. The signup user function posts to the /api/signup url with the email and password and relocates the page to /members url. this adds data to the db for future logins. When there is a login err (i.e. improper username or password) then it will run the handleLoginErr function to produce a 500 response and an alert.
 
 # Resources:
 
@@ -98,3 +125,9 @@ The password validator creates a custom method for the User model. This will che
 * https://www.npmjs.com/package/bcryptjs
 
 # Author
+
+Jennifer Henry
+
+* LinkedIn
+* GitHub
+* jenhenry1995@gmail.com

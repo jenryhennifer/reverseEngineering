@@ -11,7 +11,7 @@ $(document).ready(function() {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
     };
-
+    //ensures there is input in email and password
     if (!userData.email || !userData.password) {
       return;
     }
